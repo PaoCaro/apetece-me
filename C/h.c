@@ -9,6 +9,5 @@ int main()
   fgets(frase, sizeof(frase), stdin);
 
   printf("%s", frase);
-
   return 0;
 }

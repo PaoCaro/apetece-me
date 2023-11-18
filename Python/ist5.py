@@ -1,3 +1,5 @@
+
+
 def mapeia(valores: list, f: str):
     funcao = lambda x: eval(f)
     for i in valores:

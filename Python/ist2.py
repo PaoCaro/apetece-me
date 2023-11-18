@@ -5,9 +5,7 @@ def div (m: int, n: int):
         if m < 0 and n <= 0:
             return
     
-        h = []
-        for i in range(0, m):  # ter "n", "m" vezes
-            h.append(n)
+        h = [ n for i in range(0, m) ]
 
         j = 0
         resultado = 0
