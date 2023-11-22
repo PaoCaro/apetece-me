@@ -1,5 +1,5 @@
 
-def num_it(n: int):
+def num_it(n: int) -> int:
     if n <= 0:
         print("apenas números naturais")
         return

@@ -1,4 +1,4 @@
-def repete(w: list):
+def repete(w: list) -> list:
     total = [i for i in range(1, len(w))]
     for i in total:
         j = 0
