@@ -6,7 +6,7 @@ todas as listas de quantidades naturais  [𝑞0,…,𝑞𝚕𝚎𝚗(𝚠)−�
 
 ∑𝑖=0𝚕𝚎𝚗(𝚠)−𝟷(𝑞𝑖∗𝑤[𝑖]==𝑘)
 
-Nomeadamente, quants([1,2,5],6) deverá ser:
+Nomeadamente, quants([1,2,5], 6) deverá ser:
 [[6,0,0], [0,3,0], [2,2,0], [4,1,0], [1,0,1]].
 
 Neste exercício não pode usar definições por compreensão nem métodos. 
@@ -20,11 +20,16 @@ Pode usar range.
 
 # sum_{i = 0}^{len(w) - 1} (q_i * w[i] == k)
 
-def soma(w: list, k: int):
-    return
+def soma(li: list) -> list:
+    menos = 0
+    final = []
+    for a in range(len(li)):
+        for b in range(menos, len(li)):
+            final += [li[a] + li[b]]
+        menos += 1
+    return final
 
 def quants(w: list, k: int) -> list:
-    copia = w[:]
     Q = []
 
     lista_zero = w[:]
@@ -37,11 +42,11 @@ def quants(w: list, k: int) -> list:
         print(w[i])
         if w[i] == 1:
             lista_zero[i] = k
-            Q = Q + lista_zero
+            Q += lista_zero
         else:
             if w[i] == k:
                 lista_zero[i] = 1
-                Q = Q + lista_zero 
+                Q += lista_zero 
             else:
                 if k % w[i] == 0:
                     # i = 0
@@ -49,17 +54,113 @@ def quants(w: list, k: int) -> list:
                     # e = 2
                     # w[e] = 2
                     for e in range(len(w)):
-                        if w[e] * w[i] == k:
+                        if w[e] * w[i] == k: # potências e tabuada-incluida-na-lista
                             print("olha encontrei mais um")
                             lista_zero[i] = w[e]
-                            Q = Q + lista_zero
-                else:
-                    print("olha n ao sei")
+                            Q += lista_zero
+                            break
+                    else: # tabuada fora da lista
+                        lista_zero[i] = k // w[i]
+                        Q += lista_zero
+
+
+
         print(lista_zero)
         print("\n")
-    print(Q)
 
-quants([3,1,2,5,3], 6)
+    neozero = []
+    jota = []
+    indices = []
+    for i in range(len(w)):
+        for j in range(1, k):
+            if w[i] * j < k:
+                # print(f'{w[i]} * {j} == {w[i] * j}')
+                neozero += [w[i] * j]
+                jota += [j]
+                indices += [w[i]]
+    copia = []
+    for i in range(len(w) - 1):
+        pass
+
+
+
+    print("\nindices w[i]: ", indices)
+    print("jota: ", jota)
+    print("neozero: ", neozero)
+
+
+
+quants([1,2,5], 6)
+# 2,0 ; 0,4 ; 1,2
+
+# w[i] * q[i]
+# a * b < a ou a * b < b
+# a e b são naturais
+
+2 * 1 == 2 # A => [1]
+# ----- B:
+1 * 1 == 1
+1 * 2 == 2
+1 * 3 == 3
+
+# verificar se é IGUAL a k (AB)
+2+1
+2+2 # ==> verdadeiro => 1,2 ||  w[i] * q[i]
+2+3
+#       < k 
+
+# multiplos => range(1,k)
+
+"""
++
+++
++++
+++++
++++++
+k-vezes
+"""
+
+"""
+SOMA
+w = [1,2,5]
+
+sempre < k => menor que k
+"""
+# A =>      range(1,k)
+1 * 1 == 1
+1 * 2 == 2
+1 * 3 == 3
+1 * 4 == 4 
+1 * 5 == 5
+# ---
+# B
+2 * 1 == 2
+2 * 2 == 4
+# ----
+# C
+5 * 1 == 5
+
+#forma: A + (B,C)
+1+2
+1+4
+1+5
+2+2
+2+4
+2+5
+3+2
+3+4
+3+5
+[...]
+5+2
+5+4
+5+5
+# agora da forma B + (A,C)
+2+1
+2+2
+2+5
+
+
+# agora no mínimo uma lista com 2 números:
 
 """
 A) /
@@ -79,9 +180,34 @@ se w[i] != k:
     w[i] < k:   
         k % w[i] == 0: (2 * q[i] == 4)
             j == k // w[i]
-                encontrar um w[l] tal que j * w[l] == k
+                encontrar um w[e] tal que e * w[l] == k
 
         k % w[i] != 0: (32 * q[i] == 42)        
             um loop em que:
             um q[i] tal que q[i] * w[i] < k
+"""
+
+
+
+"""
+
+a b c d
+[d, e, f, g, h]
+a_ana_é_fish = 0
+d + e = o
+f + h = x
+e + h  = l
+x + e = f + h + e
+
+
+
+"""
+
+"""
+
+copia[1,2,3,4,5]
+neozero[a,b,c,d,e]
+copia[i] = copia[i] + neozero[i]
+    copia[i] += neozero[i]
+
 """
