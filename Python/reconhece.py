@@ -22,11 +22,9 @@ def reconhece(a: list, b: list) -> bool:
         if B == a[ok]:
             ok += 1
             if ok == len(a):
-                print(True)
                 return True
         else:
             ok = 0
-    print(False)
     return False
     
 reconhece(input("a: ").split(), input("b: ").split())

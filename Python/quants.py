@@ -20,14 +20,32 @@ Pode usar range.
 
 # sum_{i = 0}^{len(w) - 1} (q_i * w[i] == k)
 
-def soma(li: list) -> list:
+def soma(li: list, w: list, k: int) -> list:
     menos = 0
     final = []
+    la = []
+    lb = []
+    print(li)
     for a in range(len(li)):
         for b in range(menos, len(li)):
-            final += [li[a] + li[b]]
+            if li[a] + li[b] == k:
+                print(f'li[{a}]({li[a]}) + li[{b}]({li[b]}) == {li[a] + li[b]}')
+                final += [li[a] + li[b]]
+                la += [a]
+                lb += [b]
         menos += 1
+    print(la)
+    print(lb)
     return final
+
+def checker(w: list, k: int, pivo: list) -> bool:
+    resultado = 0
+    for i in range(len(w)):
+        resultado += (w[i] * pivo[i])
+    if resultado == k:
+        return True
+    return False
+
 
 def quants(w: list, k: int) -> list:
     Q = []
@@ -49,10 +67,6 @@ def quants(w: list, k: int) -> list:
                 Q += lista_zero 
             else:
                 if k % w[i] == 0:
-                    # i = 0
-                    # w[i] = 3
-                    # e = 2
-                    # w[e] = 2
                     for e in range(len(w)):
                         if w[e] * w[i] == k: # potências e tabuada-incluida-na-lista
                             print("olha encontrei mais um")
@@ -63,8 +77,6 @@ def quants(w: list, k: int) -> list:
                         lista_zero[i] = k // w[i]
                         Q += lista_zero
 
-
-
         print(lista_zero)
         print("\n")
 
@@ -74,23 +86,43 @@ def quants(w: list, k: int) -> list:
     for i in range(len(w)):
         for j in range(1, k):
             if w[i] * j < k:
-                # print(f'{w[i]} * {j} == {w[i] * j}')
+                print(f'w[{i}]({w[i]}) * j({j}) == {w[i] * j}')
                 neozero += [w[i] * j]
                 jota += [j]
                 indices += [w[i]]
-    copia = []
-    for i in range(len(w) - 1):
-        pass
 
-
-
+    copia = neozero[:]
+    print("\n")
+    for i in range(len(w) - 2): # oops, rip len(w) - 1
+        copia = soma(copia, w, k)
+    print(copia)
     print("\nindices w[i]: ", indices)
     print("jota: ", jota)
     print("neozero: ", neozero)
 
+    # pivo = w[:]
+    # cpivo = w[:]
+    # fixo = 0
+    # for i in range(k):
+    #     for j in range(len(w)):
+    #         pivo[j] = fixo
+    #         cpivo[j] = fixo
+    #     for m in range(len(w)):
+    #         for j in range(k):
+    #             pivo[m] = j
+    #             print(pivo)
+
+    #         for j in range(len(w)):
+    #             pivo[j] = cpivo[j]
+
+    #     print("\n")
+    #     fixo += 1
+    print(Q)
+
 
 
 quants([1,2,5], 6)
+
 # 2,0 ; 0,4 ; 1,2
 
 # w[i] * q[i]
@@ -110,6 +142,98 @@ quants([1,2,5], 6)
 #       < k 
 
 # multiplos => range(1,k)
+
+"""
+ffj
+fjf
+jff
+
+009
+009
+090
+900
+
+--
+
+119
+191
+911
+
+--
+
+a00
+0a0
+a00
++
+ab0
+a0b
+0ab
+------
+
+000k
+00kk
+0kkk
+----
+
+ffff
+fffk
+ffkk
+fkkk
+
+0000
+0002
+0023
+0189
+
+1111
+1119
+1184
+1862
+
+000
+001
+    0k1
+002
+    0k2
+
+
+0001
+0002
+...
+0009
+0011
+
+
+kff
+f'kf
+f'f'k
+
+000
+01
+
+000
+00k
+0kk
+kkk
+0k0
+k00
+------
+00000
+0000k
+000kk
+00kkk
+0kkkk
+kkkkk
+k000k
+kk00k
+kkk0k
+
+
+
+
+"""
+
+
 
 """
 +
