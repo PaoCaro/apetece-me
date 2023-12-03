@@ -10,9 +10,35 @@ Pode usar, sem a definir, uma função auxiliar palQ que dado um número natural
 
 """
 
-def threepals(n: int) -> tuple:
+def soma(w: list, n: int) -> list:
+    final = []
+    h = 1
+    while h < len(w) - 1:
+        for i in w:
+            for j in w[h:]:
+                for k in w[h + 1:]:
+                    if i + j + k == n:
+                        final.append((i, j, k))
+            h += 1
+    return final
+
+def threepals(n: int) -> list:
     if n < 0:
-        return ()
+        return [()]
     
+    total = range(11, n + 1)
+    palindromos = []
+
+    for i in total:
+        k = 0
+        for j in str(i):
+            if str(i)[k] == str(i)[len(str(i)) - k - 1]:
+                k += 1
+            else:
+                break
+            if k > len(str(i)) // 2:
+                palindromos.append(i)
+                break
+    return soma(palindromos, n)
 
 threepals(31415926)
