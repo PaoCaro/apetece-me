@@ -1,6 +1,7 @@
 package Java;
+import java.util.List;
 
-public class funcoes {
+public class imperativas {
     
     public int soma(int n) {
         int resultado = 0;
